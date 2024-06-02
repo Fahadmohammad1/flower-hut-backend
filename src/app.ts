@@ -1,6 +1,5 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
-// import globalErrorHandler from "./app/middleware/globalErrorHandler";
 // import routes from "./app/routes";
 import httpStatus from "http-status";
 import cookieParser from "cookie-parser";
@@ -15,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1", routes);
+// app.use("/api/v1", routes);
 
 // Testing
 app.get("/health", (req, res) => {
