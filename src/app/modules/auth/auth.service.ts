@@ -25,7 +25,7 @@ const createUser = async (user: IUser) => {
     config.jwt.expires_in as string
   );
 
-  return accessToken;
+  return { accessToken };
 };
 
 export const AuthService = {
