@@ -17,6 +17,19 @@ const getUsers = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleUser = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.user as JwtPayload;
+  const result = await UserService.getSingleUser({ email });
+
+  sendResponse<IUser | null>(res, {
+    statusCode: 200,
+    success: true,
+    message: "User fetched successfully !",
+    data: result,
+  });
+});
+
 export const UserController = {
   getUsers,
+  getSingleUser,
 };
