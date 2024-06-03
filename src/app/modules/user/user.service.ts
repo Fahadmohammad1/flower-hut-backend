@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import ApiError from "../../../errors/ApiError";
-import { IUser } from "./user.interface";
 import User from "./user.model";
+import { IUser } from "./user.interface";
 
 const getUsers = async (userInfo: Partial<IUser>): Promise<IUser[] | null> => {
   if (userInfo.role !== "admin") {

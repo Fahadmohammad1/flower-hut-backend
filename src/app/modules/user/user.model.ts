@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
+import { IUser } from "./user.interface";
 
-const userSchema = new Schema(
+const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,
@@ -18,6 +19,10 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    avatar: {
+      type: String,
+      required: false,
     },
   },
   {
