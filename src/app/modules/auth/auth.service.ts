@@ -6,7 +6,8 @@ import User from "../user/user.model";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import { Secret } from "jsonwebtoken";
 
-const createUser = async (user: IUser) => {
+// register
+const createUser = async (user: IUser): Promise<{ accessToken: string }> => {
   const { email, role } = user;
 
   if (!user.password) {
@@ -28,6 +29,32 @@ const createUser = async (user: IUser) => {
   return { accessToken };
 };
 
+// login
+const loginUser = async (
+  user: Partial<IUser>
+): Promise<{ accessToken: string }> => {
+  const { email, password } = user;
+
+  const isUserExist = await User.findOne({ email });
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
+  }
+
+  if (isUserExist.password && !(isUserExist.password === password)) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect password");
+  }
+
+  const accessToken = jwtHelpers.createToken(
+    { email, role: isUserExist.role },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
+
+  return { accessToken };
+};
+
 export const AuthService = {
   createUser,
+  loginUser,
 };
