@@ -29,7 +29,21 @@ const getSingleUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.user as JwtPayload;
+  const data = req.body;
+  const result = await UserService.updateUser(email, data);
+
+  sendResponse<IUser | null>(res, {
+    statusCode: 200,
+    success: true,
+    message: "User updated successfully !",
+    data: result,
+  });
+});
+
 export const UserController = {
   getUsers,
   getSingleUser,
+  updateUser,
 };

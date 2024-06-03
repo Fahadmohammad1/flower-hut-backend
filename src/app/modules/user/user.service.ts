@@ -25,7 +25,23 @@ const getSingleUser = async (
   return user;
 };
 
+const updateUser = async (
+  email: string,
+  data: Partial<IUser>
+): Promise<IUser | null> => {
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
+  }
+
+  const updatedUser = await User.findOneAndUpdate({ email: user.email }, data);
+
+  return updatedUser;
+};
+
 export const UserService = {
   getUsers,
   getSingleUser,
+  updateUser,
 };
