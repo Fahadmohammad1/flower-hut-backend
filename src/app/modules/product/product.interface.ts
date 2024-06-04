@@ -1,17 +1,25 @@
-export enum sizes {
-  "Small",
-  "Standard",
-  "Medium",
-  "Large",
-  "Lavish",
-  "Opulent",
-  "Extravagant",
+export enum categories {
+  Small = "Small",
+  Standard = "Standard",
+  Medium = "Medium",
+  Large = "Large",
+  Lavish = "Lavish",
+  Opulent = "Opulent",
+  Extravagant = "Extravagant",
 }
 
 export type IProduct = {
   name: string;
   image: string;
-  prices: [{ price: number; size: sizes }];
+  price: number;
+  category: categories;
   description: string;
   ownerEmail: string;
+};
+
+export type IQueryies = {
+  search?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  category?: string;
 };
