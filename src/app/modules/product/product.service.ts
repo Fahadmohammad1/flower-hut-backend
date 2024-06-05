@@ -83,7 +83,7 @@ const updateProduct = async (
     throw new ApiError(httpStatus.FORBIDDEN, "Forbidden Access");
   }
 
-  return await Product.findByIdAndUpdate({ id }, updateData);
+  return await Product.findByIdAndUpdate({ _id: id }, updateData);
 };
 
 // delete product
@@ -97,7 +97,7 @@ const deleteProduct = async (
     throw new ApiError(httpStatus.FORBIDDEN, "Forbidden Access");
   }
 
-  return await Product.findOneAndDelete({ id });
+  return await Product.findOneAndDelete({ _id: id });
 };
 
 export const ProductService = {
